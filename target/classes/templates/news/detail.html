@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${news.title}"></title>
+    <link rel="stylesheet" th:href="@{/libs/bootstrap/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/libs/font-icon/icon.css}"/>
+    <link rel="stylesheet" th:href="@{/libs/markdown/highlight.min.css}">
+    <link rel="stylesheet" th:href="@{/css/web-common.css}" />
+    <link rel="stylesheet" th:href="@{/css/web.css}" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/libs/markdown/highlight.min.js}"></script>
+    <script th:src="@{/libs/layer/layer.js}"></script>
+    <script th:src="@{/js/hc-sticky.js}"></script>
+    <script th:src="@{/js/core.js}"></script>
+    <script th:src="@{/js/web.js}"></script>
+</head>
+<body>
+<header id="header">
+    <div th:replace="common/navbar :: navbar"></div>
+</header>
+<div class="pb-container pb-content">
+    <div th:replace="common/sidebar :: sidebar"></div>
+    <div class="pb-main">
+        <div class="article-main">
+            <h3 th:text="${news.title}" class="article-title"></h3>
+            <span th:if="${news.type==0}" th:text="新闻动态" class="article-original"></span>
+            <span th:if="${news.type==1}" th:text="政策法规" class="article-original"></span>
+            <span th:if="${news.type==2}" th:text="通知公告" class="article-original"></span>
+            <div class="article-meta">发布于 <span th:text="${#dates.format(news.createTime,'yyyy-MM-dd')}"></span> &nbsp;|&nbsp; <span th:text="${news.origin}"></span> &nbsp;|&nbsp; 浏览（<span th:text="${news.clicks}"></span>）</div>
+            <hr class="hr0" />
+            <div id="content"></div>
+            <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+            <script th:inline="javascript">
+                var message = [[${news.content}]];
+                document.getElementById('content').innerHTML = marked(message);
+            </script>
+        </div>
+    </div>
+</div>
+<div th:replace="common/footer :: copyrightLight"></div>
+<div class="return_top"><a class=" fa fa-arrow-up"></a></div>
+</body>
+
+</html>

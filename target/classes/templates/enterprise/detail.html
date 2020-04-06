@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="企业信用"></title>
+    <link rel="stylesheet" th:href="@{/libs/bootstrap/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/libs/font-icon/icon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/web-common.css}" />
+    <link rel="stylesheet" th:href="@{/css/web.css}" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/bootstrap.min.js}"></script>
+    <script th:src="@{/js/hc-sticky.js}"></script>
+    <script th:src="@{/js/web.js}"></script>
+</head>
+<body>
+<header id="header">
+    <div th:replace="common/navbar :: navbar"></div>
+</header>
+<div class="pb-container pb-content">
+    <div class="title-name">
+        <h1 style="line-height: 120px" th:text="${enterprise.enterpriseName}"></h1>
+    </div>
+    <div class="pb-news">
+        <div class="pb-sidebar-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#info" data-toggle="tab">企业基本信息</a></li>
+                <li><a href="#qutity" data-toggle="tab">企业资质</a></li>
+                <li><a href="#project" data-toggle="tab">项目业绩</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="info">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="td-title" th:text="企业信用代码"></td>
+                                <td th:text="${enterprise.creditCode}"></td>
+                                <td class="td-title" th:text="企业名称"></td>
+                                <td th:text="${enterprise.enterpriseName}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-title" th:text="企业注册地址"></td>
+                                <td th:text="${enterprise.address}"></td>
+                                <td class="td-title" th:text="法人代表"></td>
+                                <td th:text="${enterprise.legalPerson}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-title" th:text="工商注册号"></td>
+                                <td th:text="${enterprise.registerCode}"></td>
+                                <td class="td-title" th:text="成立时间"></td>
+                                <td th:text="${#dates.format(enterprise.foundTime,'yyyy-MM-dd')}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-title" th:text="企业类型"></td>
+                                <td th:if="${enterprise.enterpriseType == 0}" th:text="设计"></td>
+                                <td th:if="${enterprise.enterpriseType == 1}" th:text="施工"></td>
+                                <td th:if="${enterprise.enterpriseType == 2}" th:text="管护"></td>
+                                <td th:if="${enterprise.enterpriseType == 3}" th:text="监理"></td>
+                                <td th:if="${enterprise.enterpriseType == null}" th:text=""></td>
+                                <td class="td-title" th:text="注册资金+'(万元)'"></td>
+                                <td th:text="${enterprise.registerCapital}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-title" th:text="网址"></td>
+                                <td th:text="${enterprise.website}"></td>
+                                <td class="td-title" th:text="邮箱"></td>
+                                <td th:text="${enterprise.email}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-title" th:text="外地企业"></td>
+                                <td th:if="${enterprise.isForeign == 0}" th:text="是"></td>
+                                <td th:if="${enterprise.isForeign == 1}" th:text="否"></td>
+                                <td class="td-title" th:text="登记状态"></td>
+                                <td th:text="${enterprise.status}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="qutity">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>资质类别</th>
+                                <th>证书编号</th>
+                                <th>资质等级</th>
+                                <th>核发机构</th>
+                                <th>授予日期</th>
+                                <th>资质有效期</th>
+                                <th>良好记录</th>
+                                <th>不良记录</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item,temp:${qualifications}">
+                                <td th:if="${item.type == 0}" th:text="设计类"></td>
+                                <td th:if="${item.type == 1}" th:text="施工类"></td>
+                                <td th:if="${item.type == 2}" th:text="管护类"></td>
+                                <td th:if="${item.type == 3}" th:text="监理类"></td>
+                                <td th:text="${item.certificateCode}"></td>
+                                <td th:text="${item.level}"></td>
+                                <td th:text="${item.issuedBy}"></td>
+                                <td th:text="${#dates.format(item.vestingDate,'yyyy-MM-dd')}"></td>
+                                <td th:text="${item.periodValidity}"></td>
+                                <td th:text="${item.good}"></td>
+                                <td th:text="${item.bad}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="project">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>项目名称</th>
+                                <th>类型</th>
+                                <th>区域</th>
+                                <th>金额（万元）</th>
+                                <th>工程规模</th>
+                                <th>开工时间</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item,temp:${projects}">
+                            <td th:text="${item.projectName}"></td>
+                            <td th:if="${item.projectType == 0}" th:text="设计类"></td>
+                            <td th:if="${item.projectType == 1}" th:text="施工类"></td>
+                            <td th:if="${item.projectType == 2}" th:text="管护类"></td>
+                            <td th:if="${item.projectType == 3}" th:text="监理类"></td>
+                            <td th:text="${item.region}"></td>
+                            <td th:text="${item.amount}"></td>
+                            <td th:text="${item.scale}"></td>
+                            <td th:text="${#dates.format(item.startDate,'yyyy-MM-dd')}"></td>
+                            <td th:text="${item.status}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/footer :: copyrightLight"></div>
+<div class="return_top"><a class=" fa fa-arrow-up"></a></div>
+</body>
+
+</html>

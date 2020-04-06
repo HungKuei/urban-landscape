@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="社会监督"></title>
+    <link rel="stylesheet" th:href="@{/libs/bootstrap/bootstrap.min.css}"/>
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/libs/font-icon/icon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/web-common.css}" />
+    <link rel="stylesheet" th:href="@{/css/web.css}" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/bootstrap.min.js}"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script th:src="@{/libs/layer/layer.js}"></script>
+    <script th:src="@{/js/hc-sticky.js}"></script>
+    <script th:src="@{/js/web.js}"></script>
+</head>
+<body>
+<header id="header">
+    <div th:replace="common/navbar :: navbar"></div>
+</header>
+<div class="pb-container pb-content">
+    <div class="pb-news">
+        <div class="about panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">企业注册</h3>
+            </div>
+            <div class="panel-body">
+                <div class="comment-describe">
+                    <div>
+                        <p>注册必读：</p>
+                    </div>
+                    <hr class="hr0">
+                    <div>
+                        <p>城市园林局关于印发《城市园林绿化企业信用管理办法》的通知，特别注意影响信用评分的不良信息评价项目。</p>
+                    </div>
+                </div>
+                <div class="comment-main">
+                    <form id="registerEnterprise" style="width: 80%" class="form-horizontal mt-10">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">用 户 名： </label>
+                            <div class="col-sm-9">
+                                <input id="username" type="text" class="form-control"  name="username" placeholder="请输入英文字母或数字组成的用户名（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label">密 码： </label>
+                            <div class="col-sm-9">
+                                <input id="password" type="password" class="form-control"  name="password" placeholder="请输入6位以上的密码（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="isPassword" class="col-sm-3 control-label">确认密码： </label>
+                            <div class="col-sm-9">
+                                <input id="isPassword" type="password" class="form-control" placeholder="请重复输入密码（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="creditCode" class="col-sm-3 control-label">统一社会信用代码： </label>
+                            <div class="col-sm-9">
+                                <input id="creditCode" type="text" class="form-control" name="creditCode" placeholder="请输入统一社会信用代码（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="enterpriseName" class="col-sm-3 control-label">企业全称： </label>
+                            <div class="col-sm-9">
+                                <input id="enterpriseName" type="text" class="form-control" name="enterpriseName" placeholder="请输入单位名称（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-3 control-label">公司注册地址： </label>
+                            <div class="col-sm-9">
+                                <input id="address" type="text" class="form-control" name="address" placeholder="营业执照上的地址（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="foundTime" class="col-sm-3 control-label">成立时间：</label>
+                            <!--<div class="col-sm-9">
+                                <input id="foundTime" type="text" class="form-control" name="foundTime" placeholder="企业注册成立时间（必填）">
+                            </div>-->
+                            <div class='col-sm-9 input-group date' id='foundTime'>
+                                <input type='datetime' id="dateTime" name="foundTime" class="form-control" placeholder="企业注册成立时间（必填）"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="legalPerson" class="col-sm-3 control-label">法定代表人：</label>
+                            <div class="col-sm-9">
+                                <input id="legalPerson" type="text" class="form-control" name="legalPerson" placeholder="请输入法定代表人（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="person" class="col-sm-3 control-label">联系人：</label>
+                            <div class="col-sm-9">
+                                <input id="person" type="text" class="form-control" name="person" placeholder="输入企业联系人（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-3 control-label">联系电话：</label>
+                            <div class="col-sm-9">
+                                <input id="phone" type="text" class="form-control" name="phone" placeholder="经办人的手机/座机号如023-688888888（必填）">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">Email邮箱：</label>
+                            <div class="col-sm-9">
+                                <input id="email" type="text" class="form-control" name="email" placeholder="常用联系邮箱，如：cs2015@qq.com（必填）">
+                            </div>
+                        </div>
+                        <div><button id="registerBtn" type="button" class="btn btn-pri center">立即注册</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/footer :: copyrightLight"></div>
+<div class="return_top"><a class=" fa fa-arrow-up"></a></div>
+<script  th:src="@{/js/register.js}"></script>
+</body>
+</html>

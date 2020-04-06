@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.urban.mapper.QualificationMapper">
+  <resultMap id="BaseResultMap" type="com.urban.model.Qualification">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="certificate_code" jdbcType="VARCHAR" property="certificateCode" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="issued_by" jdbcType="VARCHAR" property="issuedBy" />
+    <result column="vesting_date" jdbcType="TIMESTAMP" property="vestingDate" />
+    <result column="period_validity" jdbcType="VARCHAR" property="periodValidity" />
+    <result column="good" jdbcType="VARCHAR" property="good" />
+    <result column="bad" jdbcType="VARCHAR" property="bad" />
+  </resultMap>
+
+  <sql id="Base_Sql_Column">
+    id, enterprise_name, `type`, certificate_code,`level`,issued_by,vesting_date, period_validity,good,bad
+  </sql>
+
+  <select id="selectByQueryParam" parameterType="com.urban.model.vo.QueryParamVO" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Sql_Column"/>
+    FROM qualification
+    WHERE 1=1
+    <if test="title != null and title != ''">
+      AND enterprise_name LIKE "%"#{title}"%"
+    </if>
+    <if test="type != null">
+      AND `type` = #{type}
+    </if>
+  </select>
+
+  <select id="selectByEnterpriseName" parameterType="String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Sql_Column"/>
+    FROM qualification
+    WHERE enterprise_name = #{enterpriseName}
+  </select>
+
+</mapper>

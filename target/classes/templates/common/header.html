@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Window-target" content="_top"/>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+
+<nav th:fragment="nav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand" href="/api">
+                城市园林绿化市场信用管理系统
+            </a>
+        </div>
+        <div class="navbar-collapse" id="toggle-items" >
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/index}">主页</a>
+                </li>
+                <li>
+                    <a th:href="@{/link}">友链</a>
+                </li>
+                <li>
+                    <a th:href="@{/about}">关于</a>
+                </li>
+            </ul>
+        </div>
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script>
+            $(function () {
+                $('.navbar-toggle').click(function () {
+                    $('#toggle-items').fadeToggle("fast");
+                });
+            })
+        </script>
+    </div>
+</nav>
+<header th:fragment="header" class="intro-header" th:style="'background-image:url('+ @{/img/header.jpg} + ');'">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                  <span class="subheading">
+                      我不怕千万人阻挡，只怕自己投降
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</html>

@@ -1,0 +1,14 @@
+package com.urban;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tk.mybatis.spring.annotation.MapperScan;
+
+@SpringBootApplication
+@MapperScan(basePackages = "com.urban.mapper")
+public class LandscapeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(LandscapeApplication.class, args);
+    }
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.urban.mapper.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.urban.model.Project">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_type" jdbcType="INTEGER" property="projectType" />
+    <result column="scale" jdbcType="INTEGER" property="scale" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="contract_date" jdbcType="TIMESTAMP" property="contractDate" />
+    <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="enterprise_person" jdbcType="VARCHAR" property="enterprisePerson" />
+    <result column="project_person" jdbcType="VARCHAR" property="projectPerson" />
+    <result column="remart" jdbcType="VARCHAR" property="remart" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+
+  <sql id="Base_Sql_Column">
+    id, enterprise_name, project_name, project_type, scale, region,location,amount, contract_date,start_date, enterprise_person, project_person,remart,status
+  </sql>
+
+  <select id="selectByQueryParam" parameterType="com.urban.model.vo.QueryParamVO" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Sql_Column"/>
+    FROM project
+    WHERE 1=1
+    <if test="title != null and title != ''">
+      AND enterprise_name or project_name LIKE "%"#{title}"%"
+    </if>
+    <if test="type != null">
+      AND project_type = #{type}
+    </if>
+  </select>
+
+  <select id="selectByEnterpriseName" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Sql_Column"/>
+    FROM project
+    WHERE enterprise_name = #{enterpriseName}
+  </select>
+</mapper>

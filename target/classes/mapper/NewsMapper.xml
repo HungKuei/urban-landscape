@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.urban.mapper.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.urban.model.News">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="new_img" jdbcType="VARCHAR" property="newImg" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="clicks" jdbcType="BIGINT" property="clicks" />
+    <result column="is_rem" jdbcType="BIGINT" property="isRem" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Sql_Column">
+    id, title, `type`, origin,new_img,content, is_rem, clicks, create_time, update_time
+  </sql>
+
+  <select id="selectByQueryParam" parameterType="com.urban.model.vo.QueryParamVO" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Sql_Column"/>
+    FROM news
+    WHERE 1=1
+    <if test="title != null and title != ''">
+      AND title LIKE "%"#{title}"%"
+    </if>
+    <if test="type != null">
+      AND `type` = #{type}
+    </if>
+  </select>
+</mapper>
