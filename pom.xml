@@ -34,7 +34,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>8.0.23</version>
         </dependency>
         <!-- Pagehelper分页插件 -->
         <dependency>
@@ -81,11 +81,6 @@
             <version>1.5.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>23.0</version>
-        </dependency>
         <!--常用库依赖-->
         <dependency>
             <groupId>commons-codec</groupId>
